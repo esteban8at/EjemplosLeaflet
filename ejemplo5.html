@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>5 Ejemplo Leaflet</title>
+	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+	<script src="lib/leaflet/leaflet.js"></script>
+	
+</head>
+<body>
+
+<div id="mapid" style="width: 600px; height: 400px;">
+</div>
+
+<script>
+
+	var mymap = L.map('mapid').setView([3.42335,-76.52086], 13);
+
+	var wmsLayer = L.tileLayer.wms('http://idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', 
+	{
+		layers: 'idesc:mc_comunas',
+		attribution: 'Creditos de la capa'
+	});
+
+	wmsLayer.addTo(mymap);
+	
+	
+	L.marker([3.44420 , -76.47892 ]).addTo(mymap).bindPopup("<b>Hola Clase</b><br />Esta es una ventana Emergente !!.").openPopup();
+	
+	L.circle([3.41447,-76.54266], 500, {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5
+	}).addTo(mymap).bindPopup("Esto es un circulo !!.");
+	
+	
+	L.polygon([
+		[3.45831,-76.51951],
+		[3.44462,-76.50662],
+		[3.4215,-76.5142]
+	]).addTo(mymap).bindPopup("Esto es un Poligono");
+	
+	
+	var popup = L.popup();
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent("Usted realizo un Click en las coordenadas:  " + e.latlng.toString())
+			.openOn(mymap);
+	}
+
+	mymap.on('click', onMapClick);
+	
+	
+	
+	
+	
+	
+
+</script>
+
+</body>
+</html>

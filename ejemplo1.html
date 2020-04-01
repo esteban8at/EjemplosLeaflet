@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>1 Ejemplo Leaflet</title>
+	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+	<script src="lib/leaflet/leaflet.js"></script>
+	
+</head>
+<body>
+
+<div id="mapid" style="width: 600px; height: 400px;">
+</div>
+
+<script>
+
+	var mymap = L.map('mapid').setView([3.42335,-76.52086], 13);
+
+	var wmsLayer = L.tileLayer.wms('http://idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', 
+	{
+		layers: 'idesc:mc_comunas',
+		attribution: 'Creditos de la capa'
+	});
+
+	wmsLayer.addTo(mymap);
+
+</script>
+
+</body>
+</html>
